@@ -6,25 +6,60 @@
 </head>
 <body>
 
-<h1>クイズゲーム</h1>
+<h1>クイズゲーム（少し難しめ）</h1>
 
-<p id="question">Q1. 日本の首都は？</p>
+<p id="question"></p>
 
 <input type="text" id="answer">
 <button onclick="checkAnswer()">答える</button>
 
 <p id="result"></p>
+<p id="score"></p>
 
 <script>
+let questions = [
+  {q: "日本で一番高い山は？", a: "富士山"},
+  {q: "7 × 8 は？", a: "56"},
+  {q: "英語で「環境」は？", a: "environment"},
+  {q: "地球は太陽の周りを何日で一周する？（数字だけ）", a: "365"},
+  {q: "水の化学式は？", a: "h2o"},
+  {q: "日本の元号で2020年は何？", a: "令和"},
+  {q: "三角形の内角の和は？", a: "180"},
+  {q: "英語で「成功」は？", a: "success"}
+];
+
+let current = 0;
+let score = 0;
+
+function showQuestion() {
+  document.getElementById("question").innerText = questions[current].q;
+}
+
 function checkAnswer() {
-  let answer = document.getElementById("answer").value;
-  
-  if (answer === "東京") {
+  let userAnswer = document.getElementById("answer").value.toLowerCase();
+  let correctAnswer = questions[current].a.toLowerCase();
+
+  if (userAnswer === correctAnswer) {
     document.getElementById("result").innerText = "正解！";
+    score++;
   } else {
-    document.getElementById("result").innerText = "不正解…";
+    document.getElementById("result").innerText = "不正解… 正解は " + questions[current].a;
+  }
+
+  current++;
+
+  if (current < questions.length) {
+    document.getElementById("answer").value = "";
+    showQuestion();
+  } else {
+    document.getElementById("question").innerText = "終了！";
+    document.getElementById("result").innerText = "";
+    document.getElementById("score").innerText =
+      "あなたのスコアは " + score + " / " + questions.length + " です！";
   }
 }
+
+showQuestion();
 </script>
 
 </body>
