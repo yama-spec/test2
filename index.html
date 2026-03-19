@@ -2,11 +2,41 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>数学Ⅱクイズ（難問）</title>
+  <title>数学Ⅱクイズ（100問）</title>
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: gray;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>数学Ⅱクイズ（難しめ）</h1>
+<h1>数学Ⅱクイズ（100問）</h1>
 
 <p id="question"></p>
 
@@ -17,33 +47,44 @@
 <p id="score"></p>
 
 <script>
-let questions = [
-  {q: "y = x^2 のとき、x=3での微分係数は？", a: "6"},
-  {q: "y = 2x^3 の導関数は？（例: 6x^2 の形で）", a: "6x^2"},
-  {q: "∫2x dx の答えは？（例: x^2 の形で）", a: "x^2"},
-  {q: "log₂8 の値は？", a: "3"},
-  {q: "sin90° の値は？", a: "1"},
-  {q: "x^2 - 4 = 0 の解は？（正の解）", a: "2"},
-  {q: "y = x^2 のグラフの頂点の座標は？（例: 0,0）", a: "0,0"},
-  {q: "e^0 の値は？", a: "1"}
+let baseQuestions = [
+  {q: "y = x^2 のとき、x=5での微分係数は？", a: "10"},
+  {q: "y = x^3 の導関数は？", a: "3x^2"},
+  {q: "∫4x dx", a: "2x^2"},
+  {q: "log₂16", a: "4"},
+  {q: "sin30°", a: "0.5"},
+  {q: "cos60°", a: "0.5"},
+  {q: "x^2 - 9 = 0 の正の解", a: "3"},
+  {q: "e^0", a: "1"},
+  {q: "∫x^2 dx", a: "x^3/3"},
+  {q: "y = (x^2+1)^2 の導関数", a: "4x(x^2+1)"}
 ];
+
+// 100問に増やす（ランダムで出題）
+let questions = [];
+for (let i = 0; i < 100; i++) {
+  let rand = Math.floor(Math.random() * baseQuestions.length);
+  questions.push(baseQuestions[rand]);
+}
 
 let current = 0;
 let score = 0;
 
 function showQuestion() {
-  document.getElementById("question").innerText = questions[current].q;
+  document.getElementById("question").innerText =
+    "Q" + (current+1) + "： " + questions[current].q;
 }
 
 function checkAnswer() {
-  let userAnswer = document.getElementById("answer").value.replace(/\s/g, "").toLowerCase();
-  let correctAnswer = questions[current].a.replace(/\s/g, "").toLowerCase();
+  let userAnswer = document.getElementById("answer").value.replace(/\s/g,"").toLowerCase();
+  let correctAnswer = questions[current].a.replace(/\s/g,"").toLowerCase();
 
   if (userAnswer === correctAnswer) {
     document.getElementById("result").innerText = "正解！";
     score++;
   } else {
-    document.getElementById("result").innerText = "不正解… 正解は " + questions[current].a;
+    document.getElementById("result").innerText =
+      "不正解… 正解は " + questions[current].a;
   }
 
   current++;
@@ -55,7 +96,7 @@ function checkAnswer() {
     document.getElementById("question").innerText = "終了！";
     document.getElementById("result").innerText = "";
     document.getElementById("score").innerText =
-      "あなたのスコアは " + score + " / " + questions.length + " です！";
+      "スコア： " + score + " / 100";
   }
 }
 
