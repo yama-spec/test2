@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>クイズゲーム</title>
+  <title>数学Ⅱクイズ（難問）</title>
 </head>
 <body>
 
-<h1>クイズゲーム（少し難しめ）</h1>
+<h1>数学Ⅱクイズ（難しめ）</h1>
 
 <p id="question"></p>
 
@@ -18,14 +18,14 @@
 
 <script>
 let questions = [
-  {q: "日本で一番高い山は？", a: "富士山"},
-  {q: "7 × 8 は？", a: "56"},
-  {q: "英語で「環境」は？", a: "environment"},
-  {q: "地球は太陽の周りを何日で一周する？（数字だけ）", a: "365"},
-  {q: "水の化学式は？", a: "h2o"},
-  {q: "日本の元号で2020年は何？", a: "令和"},
-  {q: "三角形の内角の和は？", a: "180"},
-  {q: "英語で「成功」は？", a: "success"}
+  {q: "y = x^2 のとき、x=3での微分係数は？", a: "6"},
+  {q: "y = 2x^3 の導関数は？（例: 6x^2 の形で）", a: "6x^2"},
+  {q: "∫2x dx の答えは？（例: x^2 の形で）", a: "x^2"},
+  {q: "log₂8 の値は？", a: "3"},
+  {q: "sin90° の値は？", a: "1"},
+  {q: "x^2 - 4 = 0 の解は？（正の解）", a: "2"},
+  {q: "y = x^2 のグラフの頂点の座標は？（例: 0,0）", a: "0,0"},
+  {q: "e^0 の値は？", a: "1"}
 ];
 
 let current = 0;
@@ -36,8 +36,8 @@ function showQuestion() {
 }
 
 function checkAnswer() {
-  let userAnswer = document.getElementById("answer").value.toLowerCase();
-  let correctAnswer = questions[current].a.toLowerCase();
+  let userAnswer = document.getElementById("answer").value.replace(/\s/g, "").toLowerCase();
+  let correctAnswer = questions[current].a.replace(/\s/g, "").toLowerCase();
 
   if (userAnswer === correctAnswer) {
     document.getElementById("result").innerText = "正解！";
