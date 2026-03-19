@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>クイズゲーム</title>
+</head>
+<body>
 
+<h1>クイズゲーム</h1>
+
+<p id="question">Q1. 日本の首都は？</p>
+
+<input type="text" id="answer">
+<button onclick="checkAnswer()">答える</button>
+
+<p id="result"></p>
+
+<script>
+function checkAnswer() {
+  let answer = document.getElementById("answer").value;
+  
+  if (answer === "東京") {
+    document.getElementById("result").innerText = "正解！";
+  } else {
+    document.getElementById("result").innerText = "不正解…";
+  }
+}
+</script>
+
+</body>
+</html>
